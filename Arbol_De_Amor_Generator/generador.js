@@ -13,5 +13,19 @@ document.getElementById('copy-btn').onclick = function() {
   const input = document.getElementById('result-url');
   input.select();
   input.setSelectionRange(0, 99999);
-  document.execCommand('copy');
+  let copied = false;
+  try {
+    copied = document.execCommand('copy');
+  } catch (e) {
+    copied = false;
+  }
+  const btn = document.getElementById('copy-btn');
+  if (copied) {
+    btn.textContent = 'Copiado';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Copiar';
+      btn.disabled = false;
+    }, 1500);
+  }
 };
